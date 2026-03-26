@@ -7,7 +7,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/ac-service-malappuram",
     "/ac-service-kozhikode",
     "/fridge-repair-malappuram",
+    "/fridge-repair-kozhikode",
     "/washing-machine-service-kozhikode",
+    "/washing-machine-service-malappuram",
   ].map((route) => ({
     url: `${SITE_URL}${route}`,
     lastModified: new Date(),
