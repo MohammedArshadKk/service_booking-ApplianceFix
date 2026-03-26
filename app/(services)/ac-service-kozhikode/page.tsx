@@ -5,12 +5,12 @@ import { BookingForm } from "@/components/booking/BookingForm";
 import { constructMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = constructMetadata({
-  title: "Washing Machine Repair Kozhikode | Expert Machine Service",
-  description: "Professional Washing Machine Repair in Kozhikode. We fix all major brands, from motor issues to PCB board failures. Fast, same-day doorstep service available.",
-  canonical: "/washing-machine-service-kozhikode"
+  title: "AC Repair Kozhikode | Professional AC Service & Gas Charging",
+  description: "Professional AC Repair in Kozhikode district. We provide fast gas charging, filter cleaning, and complete AC maintenance by certified experts. Same-day service available.",
+  canonical: "/ac-service-kozhikode"
 });
 
-export default function WashingMachineServiceKozhikode() {
+export default function ACServiceKozhikode() {
   return (
     <div className="bg-surface">
       <section className="bg-surface-container-low py-20">
@@ -18,25 +18,25 @@ export default function WashingMachineServiceKozhikode() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-bold">
-                <span className="material-symbols-outlined text-[18px] filled-icon">local_laundry_service</span>
-                Washing Machine Repair Kozhikode
+                <span className="material-symbols-outlined text-[18px] filled-icon">ac_unit</span>
+                AC Repair Kozhikode
               </div>
               
               <h1 className="text-5xl md:text-6xl font-headline font-extrabold text-on-surface leading-tight">
-                Top-Rated <span className="text-primary">Washing Machine Repair</span> & Service in Kozhikode
+                Top-Rated <span className="text-primary">AC Repair</span> & Service in Kozhikode
               </h1>
               
               <p className="text-lg text-on-surface-variant leading-relaxed max-w-xl">
-                Need reliable **Washing Machine Repair in Kozhikode**? From motor issues to board failures, 
-                our expert technicians provide fast doorstep repair for all major brands.
+                Need expert **AC Repair in Kozhikode**? Our certified technicians provide 
+                fast and reliable service, gas leakage fixes, and deep cleaning for all AC brands.
               </p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {[
-                  "Motor Repair & Swap",
-                  "PCB Board Fixes",
-                  "Drum & Bearing Work",
-                  "Pump & Inlet Repairs"
+                  "Split & Window AC Repair",
+                  "Deep Cleaning & Service",
+                  "Gas Level Top-up",
+                  "Electrical Diagnostics"
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-3">
                     <span className="material-symbols-outlined text-tertiary">check_circle</span>
@@ -48,19 +48,19 @@ export default function WashingMachineServiceKozhikode() {
             
             <div className="bg-surface-container-lowest p-10 rounded-3xl shadow-2xl border border-outline-variant/10">
               <div className="text-center mb-8">
-                <h3 className="text-3xl font-headline font-bold text-on-surface mb-2">Book Machine Repair</h3>
-                <p className="text-on-surface-variant text-sm font-bold">Get a expert at your doorstep in 60 minutes.</p>
+                <h3 className="text-3xl font-headline font-bold text-on-surface mb-2">Book AC Repair</h3>
+                <p className="text-on-surface-variant text-sm font-bold">Technician arrival in Kozhikode within 60 mins.</p>
               </div>
-              <BookingForm defaultService="Washing Machine Repair" />
+              <BookingForm defaultService="AC Service" />
             </div>
           </div>
         </div>
       </section>
 
       <SEOContent 
-        title="Reliable Washing Machine Solutions in Kozhikode"
+        title="Professional AC Solutions in Kozhikode"
         city="Kozhikode"
-        service="Washing Machine Repair"
+        service="AC Service & Repair"
       />
     </div>
   );

@@ -5,9 +5,9 @@ import { BookingForm } from "@/components/booking/BookingForm";
 import { constructMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = constructMetadata({
-  title: "Fridge Repair in Malappuram - Expert Technician & Parts",
-  description: "Professional fridge repair in Malappuram. We fix cooling issues, compressor problems, and sensor replacements. Fast response & genuine parts.",
-  canonical: "https://servicebooking.com/fridge-repair-malappuram"
+  title: "Fridge Repair Malappuram | Professional Refrigerator Service",
+  description: "Expert Fridge Repair in Malappuram. We fix cooling issues, compressor problems, and provide gas charging for all brands. Professional, same-day refrigerator service at your doorstep.",
+  canonical: "/fridge-repair-malappuram"
 });
 
 export default function FridgeRepairMalappuram() {
@@ -19,16 +19,16 @@ export default function FridgeRepairMalappuram() {
             <div className="space-y-8">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-bold">
                 <span className="material-symbols-outlined text-[18px] filled-icon">kitchen</span>
-                Fridge Experts in Malappuram
+                Fridge Repair Malappuram
               </div>
               
               <h1 className="text-5xl md:text-6xl font-headline font-extrabold text-on-surface leading-tight">
-                Quick <span className="text-primary">Fridge Repair</span> Service
+                Top-Rated <span className="text-primary">Fridge Repair</span> Service in Malappuram
               </h1>
               
               <p className="text-lg text-on-surface-variant leading-relaxed max-w-xl">
-                Is your refrigerator not cooling correctly? We provide instant repair 
-                solutions for all brands of fridges in Malappuram.
+                Looking for the best **Fridge Repair in Malappuram**? Our expert technicians provide 
+                comprehensive repair, compressor replacement, and gas charging for all brands.
               </p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
