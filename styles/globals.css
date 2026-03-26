@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #004ac6;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #2563eb;
+  --color-on-primary-container: #eeefff;
+  --color-secondary: #3755c3;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #708cfd;
+  --color-on-secondary-container: #00217a;
+  --color-tertiary: #006229;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #007e37;
+  --color-on-tertiary-container: #c1ffc5;
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+  --color-background: #faf8ff;
+  --color-on-background: #131b2e;
+  --color-surface: #faf8ff;
+  --color-on-surface: #131b2e;
+  --color-surface-variant: #dae2fd;
+  --color-on-surface-variant: #434655;
+  --color-outline: #737686;
+  --color-outline-variant: #c3c6d7;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f2f3ff;
+  --color-surface-container: #eaedff;
+  --color-surface-container-high: #e2e7ff;
+  --color-surface-container-highest: #dae2fd;
+  --color-surface-bright: #faf8ff;
+  --color-surface-dim: #d2d9f4;
+  
+  --font-headline: "Plus Jakarta Sans", ui-sans-serif, system-ui;
+  --font-body: "Inter", ui-sans-serif, system-ui;
+  
+  --radius-3xl: 1.5rem;
+  --radius-2xl: 1rem;
+}
+
+@layer base {
+  * {
+    @apply border-outline-variant;
+  }
+  body {
+    @apply bg-surface text-on-surface font-body antialiased;
+  }
+}
+
+@layer components {
+  .glass-header {
+    background: rgba(250, 248, 255, 0.8);
+    backdrop-filter: blur(12px);
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto px-8 w-full;
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+  }
+  
+  .filled-icon {
+    font-variation-settings: 'FILL' 1 !important;
+  }
+  
+  .tonal-shift { transition: background-color 0.3s ease; }
+  .no-line { border: none !important; }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
