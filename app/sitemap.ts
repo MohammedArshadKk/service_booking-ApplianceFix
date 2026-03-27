@@ -4,16 +4,21 @@ import { getAllSeoPages } from "@/lib/seo-pages";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const pages = getAllSeoPages()
+  const baseUrl = SITE_URL.toLowerCase().replace(/\/+$/, "");
+
+  const mainPages = ["/"];
+  const generatedPages = getAllSeoPages()
     .map((p) => p.slug)
     .filter((slug) => slug !== "/");
 
-  const urls: string[] = [SITE_URL, ...pages.map((slug) => `${SITE_URL}${slug}`)];
+  const allSlugs = Array.from(new Set([...mainPages, ...generatedPages]))
+    .map((slug) => slug.toLowerCase())
+    .map((slug) => (slug.startsWith("/") ? slug : `/${slug}`));
 
-  return urls.map((url) => ({
-    url,
+  return allSlugs.map((slug) => ({
+    url: slug === "/" ? `${baseUrl}/` : `${baseUrl}${slug}`,
     lastModified: now,
     changeFrequency: "weekly" as const,
-    priority: url === SITE_URL ? 1 : 0.8,
+    priority: slug === "/" ? 1 : 0.8,
   }));
 }
