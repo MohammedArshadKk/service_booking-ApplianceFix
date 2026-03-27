@@ -7,12 +7,12 @@ import { StickyCTA, FloatingWhatsApp } from "@/components/layout/StickyCTA";
 import { DEFAULT_META_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/seo";
 import Script from "next/script";
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-body",
 });
 
-const plusJakartaSans = Plus_Jakarta_Sans({ 
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-headline",
 });
@@ -43,6 +43,9 @@ export const metadata: Metadata = {
     title: "AC & Appliance Service in Kerala",
     description: DEFAULT_META_DESCRIPTION,
     images: [`${SITE_URL}/og-image.jpg`],
+  },
+  verification: {
+    google: "sKBE63og-HL4ZizPasLXpjeM0OUezCujsEe8_3YcDxo",
   },
 };
 
