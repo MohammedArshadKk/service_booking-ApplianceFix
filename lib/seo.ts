@@ -1,7 +1,19 @@
 import { Metadata } from "next";
 
-export const SITE_URL = "https://appliancefix.com"; // Updated URL
 export const SITE_NAME = "ApplianceFix";
+
+function getSiteUrl(): string {
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL;
+  if (explicit) return explicit.replace(/\/+$/, "");
+
+  const vercelUrl = process.env.VERCEL_URL;
+  if (vercelUrl) return `https://${vercelUrl}`.replace(/\/+$/, "");
+
+  // No env vars (local dev / other hosting). Keep a reasonable default.
+  return "https://appliance-fix-nine.vercel.app";
+}
+
+export const SITE_URL = getSiteUrl();
 
 interface SEOProps {
   title: string;
