@@ -1,4 +1,6 @@
 import React from "react";
+import Link from "next/link";
+import { CITIES } from "@/lib/seo-pages";
 
 interface SEOContentProps {
   title: string;
@@ -7,6 +9,15 @@ interface SEOContentProps {
 }
 
 export const SEOContent = ({ title, city, service }: SEOContentProps) => {
+  const cityLower = city.toLowerCase();
+  const internalLinks = [
+    { href: `/ac-service-${cityLower}`, label: `AC service in ${city}` },
+    { href: `/fridge-repair-${cityLower}`, label: `fridge repair in ${city}` },
+    { href: `/washing-machine-service-${cityLower}`, label: `washing machine service in ${city}` },
+    { href: `/ac-not-cooling-${cityLower}`, label: `AC not cooling fix in ${city}` },
+    { href: `/fridge-not-working-${cityLower}`, label: `fridge not working fix in ${city}` },
+  ];
+
   return (
     <section className="px-8 py-20 bg-surface border-t border-outline-variant/10">
       <div className="max-w-4xl mx-auto">
@@ -19,6 +30,10 @@ export const SEOContent = ({ title, city, service }: SEOContentProps) => {
               At <span className="text-primary font-bold">ApplianceFix</span>, we understand how frustrating it is when your home appliances break down. 
               Whether it's a hot summer afternoon and your AC stopped cooling, or your fridge is leaking water, 
               our team of expert technicians is ready to help you with fast, affordable, and professional repair services.
+            </p>
+            <p>
+              Many customers find us by searching <strong>“{service} near me”</strong>, <strong>“best {service} in {city}”</strong>, or urgent queries like
+              <strong> “{city} appliance repair near your location”</strong>. If that’s you, just message us on WhatsApp with your area and symptom—our support team will confirm the nearest available technician and an ETA.
             </p>
           </div>
 
@@ -47,6 +62,21 @@ export const SEOContent = ({ title, city, service }: SEOContentProps) => {
                 </li>
               ))}
             </ul>
+          </div>
+
+          <div className="space-y-8">
+            <h3 className="text-2xl font-headline font-bold text-on-surface">Pricing & What You Pay For</h3>
+            <p>
+              Your final cost depends on the appliance brand, age, and the exact issue. We always share an estimate before starting the repair.
+              Typical charges include inspection/visiting fee (adjusted if you proceed), labor, and spare parts (only if needed). If you’re searching for <strong>affordable {service} in {city}</strong>, ask us for the best option—we’ll recommend a repair-first approach whenever possible.
+            </p>
+          </div>
+
+          <div className="space-y-8">
+            <h3 className="text-2xl font-headline font-bold text-on-surface">Service Areas Around {city}</h3>
+            <p>
+              We serve major neighborhoods and nearby towns around {city}. If you are slightly outside the city center, share your location on WhatsApp and we’ll confirm availability. This is how we fulfill “<strong>near me</strong>” requests quickly and reliably.
+            </p>
           </div>
 
           <div className="space-y-8">
@@ -82,6 +112,24 @@ export const SEOContent = ({ title, city, service }: SEOContentProps) => {
                 </span>
               ))}
             </div>
+          </div>
+
+          <div className="space-y-6">
+            <h3 className="text-2xl font-headline font-bold text-on-surface">Explore related services</h3>
+            <div className="flex flex-wrap gap-3">
+              {internalLinks.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className="px-4 py-2 rounded-full bg-surface-container-low border border-outline-variant/10 hover:bg-surface-container transition-colors text-sm font-bold text-on-surface"
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </div>
+            <p className="text-sm text-on-surface-variant">
+              Tip: If you don’t see your exact issue here, try searching our site for the problem (for example “not cooling”, “leaking”, “error code”). We continuously add new pages for more locations in Kerala.
+            </p>
           </div>
 
           <p className="text-center pt-8 border-t border-outline-variant/10 italic text-on-surface-variant/80">

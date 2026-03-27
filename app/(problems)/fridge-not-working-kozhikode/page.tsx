@@ -2,12 +2,19 @@ import React from "react";
 import { Metadata } from "next";
 import { SEOContent } from "@/components/sections/SEOContent";
 import { BookingForm } from "@/components/booking/BookingForm";
-import { constructMetadata } from "@/lib/seo";
+import { constructMetadata, generateSEO } from "@/lib/seo";
+
+const seo = generateSEO({
+  service: "Fridge Not Working Repair",
+  location: "Kozhikode",
+  intent: "Call now",
+});
 
 export const metadata: Metadata = constructMetadata({
-  title: "Fridge Not Working in Kozhikode? Expert Same-Day Repair",
-  description: "Is your refrigerator not working? We fix all fridge issues in Kozhikode within 60 minutes. Certified technicians and genuine parts.",
-  canonical: "https://servicebooking.com/fridge-not-working-kozhikode"
+  title: seo.title,
+  description: seo.description,
+  canonical: "/fridge-not-working-kozhikode",
+  keywords: seo.keywords,
 });
 
 export default function FridgeNotWorkingKozhikode() {

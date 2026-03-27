@@ -1,21 +1,19 @@
 import { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
+import { getAllSeoPages } from "@/lib/seo-pages";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = [
-    "",
-    "/ac-service-malappuram",
-    "/ac-service-kozhikode",
-    "/fridge-repair-malappuram",
-    "/fridge-repair-kozhikode",
-    "/washing-machine-service-kozhikode",
-    "/washing-machine-service-malappuram",
-  ].map((route) => ({
-    url: `${SITE_URL}${route}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: route === "" ? 1 : 0.8,
-  }));
+  const now = new Date();
+  const pages = getAllSeoPages()
+    .map((p) => p.slug)
+    .filter((slug) => slug !== "/");
 
-  return routes;
+  const urls: string[] = [SITE_URL, ...pages.map((slug) => `${SITE_URL}${slug}`)];
+
+  return urls.map((url) => ({
+    url,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: url === SITE_URL ? 1 : 0.8,
+  }));
 }

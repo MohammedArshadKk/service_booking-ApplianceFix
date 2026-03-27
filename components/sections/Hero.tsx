@@ -3,9 +3,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "../ui/Button";
 import { Modal } from "../ui/Modal";
 import { BookingForm } from "../booking/BookingForm";
+import { trackEvent } from "@/lib/analytics";
 
 export const Hero = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,12 +31,19 @@ export const Hero = () => {
           
           <div className="flex flex-col sm:flex-row gap-4">
             <button 
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => {
+                trackEvent("click_book_service_now", { source: "hero" });
+                setIsModalOpen(true);
+              }}
               className="px-8 py-4 bg-primary text-on-primary rounded-2xl font-bold text-lg shadow-lg shadow-primary/20 transition-all hover:scale-[1.02] active:scale-95"
             >
-              Book via WhatsApp
+              Book Service Now
             </button>
-            <Link href="tel:+918590203732" className="px-8 py-4 bg-surface-container-low text-on-surface rounded-2xl font-bold text-lg transition-all hover:bg-surface-container-high active:scale-95 text-center">
+            <Link
+              href="tel:+918590203732"
+              onClick={() => trackEvent("click_call", { source: "hero" })}
+              className="px-8 py-4 bg-surface-container-low text-on-surface rounded-2xl font-bold text-lg transition-all hover:bg-surface-container-high active:scale-95 text-center"
+            >
               Call Now
             </Link>
           </div>

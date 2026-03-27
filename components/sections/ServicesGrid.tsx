@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Card } from "../ui/Card";
-import { Button } from "../ui/Button";
+import Link from "next/link";
 import { Modal } from "../ui/Modal";
 import { BookingForm } from "../booking/BookingForm";
 
@@ -53,12 +52,12 @@ export const ServicesGrid = () => {
                 >
                   Book Now
                 </button>
-                <a 
+                <Link 
                   href={service.href} 
                   className="block text-center text-sm font-bold text-primary hover:underline"
                 >
                   View Repair Details
-                </a>
+                </Link>
               </div>
             </div>
           ))}

@@ -1,3 +1,5 @@
+import { trackEvent } from "@/lib/analytics";
+
 export interface BookingDetails {
   name: string;
   phone: string;
@@ -25,5 +27,9 @@ export const generateWhatsAppUrl = (details: BookingDetails) => {
 
 export const redirectToWhatsApp = (details: BookingDetails) => {
   const url = generateWhatsAppUrl(details);
+  trackEvent("booking_submit_whatsapp", {
+    service: details.service || "unknown",
+    source: "booking_form",
+  });
   window.open(url, "_blank");
 };

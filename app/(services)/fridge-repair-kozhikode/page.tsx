@@ -2,12 +2,19 @@ import React from "react";
 import { Metadata } from "next";
 import { SEOContent } from "@/components/sections/SEOContent";
 import { BookingForm } from "@/components/booking/BookingForm";
-import { constructMetadata } from "@/lib/seo";
+import { constructMetadata, generateSEO } from "@/lib/seo";
+
+const seo = generateSEO({
+  service: "Fridge Repair",
+  location: "Kozhikode",
+  intent: "Book now",
+});
 
 export const metadata: Metadata = constructMetadata({
-  title: "Fridge Repair Kozhikode | Expert Refrigerator Service",
-  description: "Professional Fridge Repair in Kozhikode district. We fix all refrigerator brands and models. Instant cooling issue resolution and genuine parts replacement.",
-  canonical: "/fridge-repair-kozhikode"
+  title: seo.title,
+  description: seo.description,
+  canonical: "/fridge-repair-kozhikode",
+  keywords: seo.keywords,
 });
 
 export default function FridgeRepairKozhikode() {

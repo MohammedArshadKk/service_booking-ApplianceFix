@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 
 export const SITE_NAME = "ApplianceFix";
+export const DEFAULT_META_DESCRIPTION =
+  "Book AC, fridge, and washing machine services in Malappuram & Kozhikode. Fast, reliable, and affordable service near you.";
 
 function getSiteUrl(): string {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL;
@@ -15,12 +17,44 @@ function getSiteUrl(): string {
 
 export const SITE_URL = getSiteUrl();
 
+export function toAbsoluteUrl(pathOrUrl?: string): string {
+  if (!pathOrUrl) return SITE_URL;
+  if (pathOrUrl.startsWith("http://") || pathOrUrl.startsWith("https://")) return pathOrUrl;
+  if (pathOrUrl.startsWith("/")) return `${SITE_URL}${pathOrUrl}`;
+  return `${SITE_URL}/${pathOrUrl}`;
+}
+
 interface SEOProps {
   title: string;
   description: string;
   canonical?: string;
   ogImage?: string;
   noIndex?: boolean;
+  keywords?: string[];
+}
+
+export function generateSEO({
+  service,
+  location,
+  intent = "Book now",
+}: {
+  service: string;
+  location: SupportedCity;
+  intent?: string;
+}) {
+  const normalizedService = service.trim();
+  const normalizedLocation = location.trim() as SupportedCity;
+  const title = `${normalizedService} in ${normalizedLocation} | Fast Repair Near You`;
+  const description = `${normalizedService} in ${normalizedLocation}. Fast, reliable, and affordable doorstep support. ${intent} via WhatsApp or call now.`;
+  const keywords = [
+    `${normalizedService} in ${normalizedLocation}`,
+    `${normalizedService} near me`,
+    `${normalizedService} ${normalizedLocation}`,
+    "appliance repair near me",
+    "same day appliance service",
+  ];
+
+  return { title, description, keywords };
 }
 
 export function constructMetadata({
@@ -29,18 +63,23 @@ export function constructMetadata({
   canonical,
   ogImage = "/og-image.jpg",
   noIndex = false,
+  keywords,
 }: SEOProps): Metadata {
+  const canonicalAbs = toAbsoluteUrl(canonical);
+  const ogImageAbs = toAbsoluteUrl(ogImage);
+
   return {
-    title: `${title} | ${SITE_NAME}`,
+    title: `${title} | AC & Appliance Service in Kerala`,
     description,
+    keywords,
     openGraph: {
       title,
       description,
-      url: canonical || SITE_URL,
+      url: canonicalAbs,
       siteName: SITE_NAME,
       images: [
         {
-          url: ogImage,
+          url: ogImageAbs,
         },
       ],
       type: "website",
@@ -49,10 +88,10 @@ export function constructMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [ogImage],
+      images: [ogImageAbs],
     },
     alternates: {
-      canonical: canonical || SITE_URL,
+      canonical: canonicalAbs,
     },
     robots: {
       index: !noIndex,
@@ -61,10 +100,32 @@ export function constructMetadata({
   };
 }
 
-export const generateLocalBusinessSchema = (city: "Malappuram" | "Kozhikode") => {
-  const address = city === "Malappuram" 
-    ? { street: "Down Hill", city: "Malappuram", state: "Kerala", zip: "676505" }
-    : { street: "Focus Mall Area", city: "Kozhikode", state: "Kerala", zip: "673001" };
+export type SupportedCity = "Malappuram" | "Kozhikode";
+
+const CITY_DATA: Record<
+  SupportedCity,
+  { street: string; city: string; state: string; zip: string; latitude: number; longitude: number }
+> = {
+  Malappuram: {
+    street: "Down Hill",
+    city: "Malappuram",
+    state: "Kerala",
+    zip: "676505",
+    latitude: 11.051,
+    longitude: 76.0711,
+  },
+  Kozhikode: {
+    street: "Focus Mall Area",
+    city: "Kozhikode",
+    state: "Kerala",
+    zip: "673001",
+    latitude: 11.2588,
+    longitude: 75.7804,
+  },
+};
+
+export const generateLocalBusinessSchema = (city: SupportedCity) => {
+  const address = CITY_DATA[city];
 
   return {
     "@context": "https://schema.org",
@@ -84,8 +145,8 @@ export const generateLocalBusinessSchema = (city: "Malappuram" | "Kozhikode") =>
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": city === "Malappuram" ? 11.0510 : 11.2588,
-      "longitude": city === "Malappuram" ? 76.0711 : 75.7804
+      "latitude": address.latitude,
+      "longitude": address.longitude
     },
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
@@ -98,7 +159,7 @@ export const generateLocalBusinessSchema = (city: "Malappuram" | "Kozhikode") =>
   };
 };
 
-export const generateServiceSchema = (serviceName: string, description: string) => {
+export const generateServiceSchema = (serviceName: string, description: string, city?: SupportedCity) => {
   return {
     "@context": "https://schema.org/",
     "@type": "Service",
@@ -108,10 +169,9 @@ export const generateServiceSchema = (serviceName: string, description: string) 
       "@type": "LocalBusiness",
       "name": SITE_NAME
     },
-    "areaServed": [
-      { "@type": "City", "name": "Malappuram" },
-      { "@type": "City", "name": "Kozhikode" }
-    ]
+    "areaServed": city
+      ? [{ "@type": "City", "name": city }]
+      : [{ "@type": "City", "name": "Malappuram" }, { "@type": "City", "name": "Kozhikode" }]
   };
 };
 

@@ -2,12 +2,19 @@ import React from "react";
 import { Metadata } from "next";
 import { SEOContent } from "@/components/sections/SEOContent";
 import { BookingForm } from "@/components/booking/BookingForm";
-import { constructMetadata } from "@/lib/seo";
+import { constructMetadata, generateSEO } from "@/lib/seo";
+
+const seo = generateSEO({
+  service: "Fridge Repair",
+  location: "Malappuram",
+  intent: "Call now",
+});
 
 export const metadata: Metadata = constructMetadata({
-  title: "Fridge Repair Malappuram | Professional Refrigerator Service",
-  description: "Expert Fridge Repair in Malappuram. We fix cooling issues, compressor problems, and provide gas charging for all brands. Professional, same-day refrigerator service at your doorstep.",
-  canonical: "/fridge-repair-malappuram"
+  title: seo.title,
+  description: seo.description,
+  canonical: "/fridge-repair-malappuram",
+  keywords: seo.keywords,
 });
 
 export default function FridgeRepairMalappuram() {

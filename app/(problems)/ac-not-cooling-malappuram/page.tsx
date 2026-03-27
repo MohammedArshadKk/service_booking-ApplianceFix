@@ -2,12 +2,19 @@ import React from "react";
 import { Metadata } from "next";
 import { SEOContent } from "@/components/sections/SEOContent";
 import { BookingForm } from "@/components/booking/BookingForm";
-import { constructMetadata } from "@/lib/seo";
+import { constructMetadata, generateSEO } from "@/lib/seo";
+
+const seo = generateSEO({
+  service: "AC Not Cooling Fix",
+  location: "Malappuram",
+  intent: "Book now",
+});
 
 export const metadata: Metadata = constructMetadata({
-  title: "AC Not Cooling in Malappuram? Fast Repair & Gas Fill",
-  description: "Is your AC not cooling correctly? We fix AC cooling issues in Malappuram within 60 minutes. Expert technicians and guaranteed results.",
-  canonical: "https://servicebooking.com/ac-not-cooling-malappuram"
+  title: seo.title,
+  description: seo.description,
+  canonical: "/ac-not-cooling-malappuram",
+  keywords: seo.keywords,
 });
 
 export default function ACNotCoolingMalappuram() {

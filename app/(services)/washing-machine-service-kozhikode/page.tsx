@@ -2,12 +2,19 @@ import React from "react";
 import { Metadata } from "next";
 import { SEOContent } from "@/components/sections/SEOContent";
 import { BookingForm } from "@/components/booking/BookingForm";
-import { constructMetadata } from "@/lib/seo";
+import { constructMetadata, generateSEO } from "@/lib/seo";
+
+const seo = generateSEO({
+  service: "Washing Machine Service",
+  location: "Kozhikode",
+  intent: "Call now",
+});
 
 export const metadata: Metadata = constructMetadata({
-  title: "Washing Machine Repair Kozhikode | Expert Machine Service",
-  description: "Professional Washing Machine Repair in Kozhikode. We fix all major brands, from motor issues to PCB board failures. Fast, same-day doorstep service available.",
-  canonical: "/washing-machine-service-kozhikode"
+  title: seo.title,
+  description: seo.description,
+  canonical: "/washing-machine-service-kozhikode",
+  keywords: seo.keywords,
 });
 
 export default function WashingMachineServiceKozhikode() {

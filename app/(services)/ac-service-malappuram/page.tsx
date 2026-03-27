@@ -3,17 +3,40 @@ import { Metadata } from "next";
 import { Hero } from "@/components/sections/Hero";
 import { SEOContent } from "@/components/sections/SEOContent";
 import { BookingForm } from "@/components/booking/BookingForm";
-import { constructMetadata } from "@/lib/seo";
+import { constructMetadata, generateFAQSchema, generateLocalBusinessSchema, generateSEO, generateServiceSchema } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+
+const seo = generateSEO({
+  service: "AC Service",
+  location: "Malappuram",
+  intent: "Book now",
+});
 
 export const metadata: Metadata = constructMetadata({
-  title: "AC Repair Malappuram | Expert Service & Gas Charging",
-  description: "Professional AC Repair in Malappuram. Fast gas charging, filter cleaning, and complete maintenance by certified experts. Same-day service available across Malappuram district.",
-  canonical: "/ac-service-malappuram"
+  title: seo.title,
+  description: seo.description,
+  canonical: "/ac-service-malappuram",
+  keywords: [...seo.keywords, "AC gas charging Malappuram", "AC cleaning Malappuram"],
 });
 
 export default function ACServiceMalappuram() {
+  const faqs = [
+    { q: "How fast can you provide AC service in Malappuram?", a: "Most bookings get same-day slots based on technician availability and your exact area. We confirm ETA before dispatch." },
+    { q: "Do you handle gas leak and charging?", a: "Yes. We do leak checks, pressure testing, and gas charging with proper safety procedures." },
+    { q: "Do you provide warranty?", a: "Yes. We provide service warranty on labor and warranty on replaced spare parts (if any)." },
+  ];
+
+  const jsonLd = [
+    generateLocalBusinessSchema("Malappuram"),
+    generateServiceSchema("AC Service & Repair", metadata.description as string, "Malappuram"),
+    generateFAQSchema(faqs),
+  ];
+
   return (
     <div className="bg-surface">
+      {jsonLd.map((d, i) => (
+        <JsonLd key={i} data={d} />
+      ))}
       <section className="bg-surface-container-low py-20">
         <div className="max-w-7xl mx-auto px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">

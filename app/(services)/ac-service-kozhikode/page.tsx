@@ -2,12 +2,19 @@ import React from "react";
 import { Metadata } from "next";
 import { SEOContent } from "@/components/sections/SEOContent";
 import { BookingForm } from "@/components/booking/BookingForm";
-import { constructMetadata } from "@/lib/seo";
+import { constructMetadata, generateSEO } from "@/lib/seo";
+
+const seo = generateSEO({
+  service: "AC Service",
+  location: "Kozhikode",
+  intent: "Book now",
+});
 
 export const metadata: Metadata = constructMetadata({
-  title: "AC Repair Kozhikode | Professional AC Service & Gas Charging",
-  description: "Professional AC Repair in Kozhikode district. We provide fast gas charging, filter cleaning, and complete AC maintenance by certified experts. Same-day service available.",
-  canonical: "/ac-service-kozhikode"
+  title: seo.title,
+  description: seo.description,
+  canonical: "/ac-service-kozhikode",
+  keywords: seo.keywords,
 });
 
 export default function ACServiceKozhikode() {

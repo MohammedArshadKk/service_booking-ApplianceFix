@@ -2,12 +2,19 @@ import React from "react";
 import { Metadata } from "next";
 import { SEOContent } from "@/components/sections/SEOContent";
 import { BookingForm } from "@/components/booking/BookingForm";
-import { constructMetadata } from "@/lib/seo";
+import { constructMetadata, generateSEO } from "@/lib/seo";
+
+const seo = generateSEO({
+  service: "Washing Machine Service",
+  location: "Malappuram",
+  intent: "Book now",
+});
 
 export const metadata: Metadata = constructMetadata({
-  title: "Washing Machine Repair Malappuram | Expert Service",
-  description: "Professional Washing Machine Repair in Malappuram district. Fast doorstep service for front-load and top-load machines. Certified experts and genuine spare parts.",
-  canonical: "/washing-machine-service-malappuram"
+  title: seo.title,
+  description: seo.description,
+  canonical: "/washing-machine-service-malappuram",
+  keywords: seo.keywords,
 });
 
 export default function WashingMachineServiceMalappuram() {
